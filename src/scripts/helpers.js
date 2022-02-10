@@ -11,6 +11,10 @@ const errorHandler = response => {
     return response;
 }
 
+export function isObjectEmpty(object) {
+    return Object.keys(object).length === 0 && object.constructor === Object ? true : false;
+}
+
 export async function getJson(url) {
     try {
         return await fetch(url, {signal: timeout(TIMEOUT_SEC).signal})

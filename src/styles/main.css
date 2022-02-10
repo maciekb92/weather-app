@@ -28,8 +28,7 @@ body {
     grid-template-areas: 
     "header header"
     "search search"
-    "current_weather current_weather"
-    "forecast forecast";
+    "weather__results weather__results";
 }
 
 /* Header */
@@ -46,60 +45,10 @@ body {
     font-weight: 100;
 }
 
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 3rem;
-    height: 1.7rem;
-}
-  
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-  
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--main-color-higher-transparency);
-    transition: .4s;  
-}
-  
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 1.25rem;
-    width: 1.25rem;
-    left: 0.25rem;
-    bottom: 0.25rem;
-    background-color: var(--main-color-higher-transparency);
-    transition: .4s;
-}
-  
-input:checked + .slider {
-    background-color: rgba(206, 103, 180, 0.699);
-}
-
-input:checked + .slider:before {
-    transform: translateX(1.3rem);
-}
-  
-.slider.round {
-    border-radius: 2.15rem;
-}
-  
-.slider.round:before {
-    border-radius: 50%;
-}
-
 /* Search */
 
 .weather__search--container {
+    margin-top: 40%;
     grid-area: search;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
@@ -107,6 +56,7 @@ input:checked + .slider:before {
     padding: 0.5rem;
     border: 2px solid var(--main-color-higher-transparency);
     border-radius: 2rem 2rem;
+    transition: 1s;
 }
 
 .weather__search--container:hover {
@@ -156,19 +106,31 @@ input:checked + .slider:before {
     padding: 0.4rem;
 }
 
-/* Current temperature */
+/* Weather results */
 
-.weather__current--container {
-    grid-area: current_weather;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.weather__results--container {
+    grid-area: weather__results;
     grid-column: 1 / -1;
     grid-row: 3 / 4;
+    animation: fadeIn 1s backwards;
 }
+
+/* Current temperature */
 
 .weather__current--temperature-container {
     display: flex;
     gap: 5rem;
     justify-content: space-between;
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
 
 .weather__current--present-weather {
@@ -212,9 +174,7 @@ input:checked + .slider:before {
 /* Forecast */
 
 .weather__forecast--container {
-    grid-area: forecast;
-    grid-column: 1 / -1;
-    grid-row: 4 / 5;
+    margin: 1.25rem 0;
 }
 
 .weather__forecast--intervals-container {

@@ -13,7 +13,9 @@ class Search {
                 return {
                     name: city.name,
                     country: city.country,
-                    state: city.state
+                    state: city.state,
+                    lat: city.lat,
+                    lon: city.lon
                 };
             });
         } catch(error) {

@@ -11,32 +11,46 @@ class SearchView extends View {
         super();
     }
 
-    getQuery() {
-        return this._searchInput.value;
-    }
-
-    getCityName(event) {
-        if (event.target.className === 'weather__search--city') return event.target.innerText.replace(/\s/g, '');
-    }
-
     addCitySelectHandler(handler) {
         this._parentElement.addEventListener('click', event => {
             event.preventDefault();
-            const cityName = this.getCityName(event);
-            handler(cityName);
+
+            const cityId = Object(this._getCityId(event));
+            handler(cityId);
         });
     }
 
     addSearchHandler(handler) {
-        this._searchInput.addEventListener('input', event => {
+        this._searchInput.addEventListener('keyup', event => {
             event.preventDefault();
+
+            if (this._searchInput.getAttribute('placeholder')) this.setMarginTopSearchInput();
             handler();    
         });           
+    }
+
+    getQuery() {
+        return this._searchInput.value;
     }
 
     clearSearchResults() {
         const cityList = this._parentElement.querySelectorAll('.weather__search--autocomplete');
         if (cityList.length > 0) cityList.forEach(element => element.remove());
+    }
+
+    setMarginTopSearchInput(value = 40) {
+        this._parentElement.style.setProperty('margin-top', `${value}%`);
+    }
+
+    _getCityId(event) {
+        if (event.target.className === 'weather__search--city') {
+            const cities = this._parentElement.querySelectorAll('.weather__search--city');
+            for(let i = 0; i < cities.length; i++) {
+                if (cities[i] === event.target) {
+                    return i;
+                }
+            }
+        }
     }
 
     _renderError() {
