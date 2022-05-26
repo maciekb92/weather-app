@@ -31,10 +31,11 @@ const controlCitySelection = async function(cityId) {
         searchView.setMarginTopSearchInput(marginTopSearchInputValue);
         searchView.clearSearchResults();
 
-        const city = search.searchResults[cityId];
-        await weather.loadWeatherResult(city);
+        const cityResults = search.searchResults[cityId];
+        await weather.loadWeatherResult(cityResults);
         const weatherResults = weather.weatherResults;
-        setTimeout(() => weatherView.render(weatherResults), 500);
+        const cityAndWeatherResults = { ...cityResults, ...weatherResults }
+        setTimeout(() => weatherView.render(cityAndWeatherResults), 500);
     } catch(error) {
         throw error;
     }

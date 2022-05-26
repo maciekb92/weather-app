@@ -137,25 +137,32 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    place-items: center;
-    justify-content: center;
     background-color: var(--current-weather-background);
     border-radius: 10px;
-    width: 35%;
+    width: 26%;
 }
 
 .weather__current--weather-icon {
-    width: 15rem;
-    height: 15rem;
+    width: 12rem;
+    height: 12rem;
     grid-row: 1 / -1;
+    
 }
 
 .weather__current--temperature {
     grid-row: 1 / 2;
+    font-size: 50px;
+    padding-top: 1rem;
 }
 
 .weather__current--cloudiness {
     grid-row: 2 / 3;
+    align-self: start;
+    font-size: 28px;
+}
+
+.weather__current--cloudiness::first-letter {
+    text-transform: uppercase;
 }
 
 .weather__current--temperature,
@@ -168,7 +175,6 @@ body {
     background-color: var(--current-weather-background);
     border-radius: 10px;
     width: 50%;
-    
 }
 
 /* Forecast */
